@@ -25,7 +25,8 @@ export function AutomationWorkflows() {
         'Make.com receives event',
         'Automation processes reflection data',
         'Daily report delivered to Slack'
-      ]
+      ],
+      slackImage: { src: '/images/slack/slack-1.png', alt: 'Slack output — Daily Performance Report' }
     },
     {
       title: 'Workflow 2 — AI Content Draft Delivery',
@@ -37,7 +38,8 @@ export function AutomationWorkflows() {
         'User clicks the final action button to trigger automation',
         'Make.com and GPT format the content package',
         'Draft sent to Slack for social media manager review'
-      ]
+      ],
+      slackImage: { src: '/images/slack/slack-2.png', alt: 'Slack output — AI Content Draft Delivery' }
     }
   ];
 
@@ -83,6 +85,12 @@ export function AutomationWorkflows() {
                   </div>
                 ))}
               </div>
+              <img
+                src={workflow.slackImage.src}
+                alt={workflow.slackImage.alt}
+                onClick={() => setSelectedImage(workflow.slackImage)}
+                className="mt-6 w-full h-auto rounded-xl border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity"
+              />
             </motion.div>
           ))}
         </div>
