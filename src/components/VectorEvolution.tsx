@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { LayoutList, Sparkles, Brain } from 'lucide-react';
 
 export function VectorEvolution() {
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedImage(null);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [selectedImage]);
+
   return (
     <section id="vector-evolution" className="py-24 bg-slate-50 border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -36,37 +47,9 @@ export function VectorEvolution() {
               Vector V1 was the first prototype focused on task and mission management. Users could create missions, categorize tasks, track progress, and organize work through a pipeline similar to a Kanban board. This version helped test the basic idea of structured execution.
             </p>
             <div className="grid grid-cols-3 gap-3 mt-6">
-              {/* Kanban Mockup */}
-              <div className="aspect-[4/3] bg-slate-50 rounded-lg border border-slate-200 p-2 flex gap-1.5 overflow-hidden">
-                <div className="flex-1 bg-slate-100 rounded flex flex-col gap-1.5 p-1.5">
-                  <div className="h-1.5 w-1/2 bg-slate-300 rounded mb-1"></div>
-                  <div className="h-4 bg-white rounded shadow-sm border border-slate-100"></div>
-                  <div className="h-4 bg-white rounded shadow-sm border border-slate-100"></div>
-                </div>
-                <div className="flex-1 bg-slate-100 rounded flex flex-col gap-1.5 p-1.5">
-                  <div className="h-1.5 w-1/2 bg-slate-300 rounded mb-1"></div>
-                  <div className="h-4 bg-white rounded shadow-sm border border-slate-100"></div>
-                </div>
-              </div>
-              {/* List Mockup */}
-              <div className="aspect-[4/3] bg-slate-50 rounded-lg border border-slate-200 p-2.5 flex flex-col gap-2 overflow-hidden">
-                <div className="h-2 w-1/3 bg-slate-300 rounded mb-1"></div>
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-sm border-2 border-slate-300"></div>
-                    <div className="h-2 flex-1 bg-slate-200 rounded"></div>
-                  </div>
-                ))}
-              </div>
-              {/* Progress Mockup */}
-              <div className="aspect-[4/3] bg-slate-50 rounded-lg border border-slate-200 p-2 flex flex-col justify-end items-center overflow-hidden">
-                <div className="flex items-end gap-1.5 w-full h-full justify-center pb-1">
-                  <div className="w-4 h-1/3 bg-blue-200 rounded-t-sm"></div>
-                  <div className="w-4 h-2/3 bg-blue-300 rounded-t-sm"></div>
-                  <div className="w-4 h-1/2 bg-blue-400 rounded-t-sm"></div>
-                  <div className="w-4 h-full bg-blue-500 rounded-t-sm"></div>
-                </div>
-              </div>
+              <img src="/images/vector/v1/vector-v1-1.png" alt="Vector V1 screenshot 1" onClick={() => setSelectedImage({ src: '/images/vector/v1/vector-v1-1.png', alt: 'Vector V1 screenshot 1' })} className="aspect-[4/3] w-full object-cover rounded-lg border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity" />
+              <img src="/images/vector/v1/vector-v1-2.png" alt="Vector V1 screenshot 2" onClick={() => setSelectedImage({ src: '/images/vector/v1/vector-v1-2.png', alt: 'Vector V1 screenshot 2' })} className="aspect-[4/3] w-full object-cover rounded-lg border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity" />
+              <img src="/images/vector/v1/vector-v1-3.png" alt="Vector V1 screenshot 3" onClick={() => setSelectedImage({ src: '/images/vector/v1/vector-v1-3.png', alt: 'Vector V1 screenshot 3' })} className="aspect-[4/3] w-full object-cover rounded-lg border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity" />
             </div>
           </motion.div>
 
@@ -85,28 +68,9 @@ export function VectorEvolution() {
               Vector V2 expanded the system into an AI-powered productivity and automation platform. It introduced OpenAI integrations for text and image generation, automated content workflows, and Make.com webhook pipelines. This version demonstrated how AI could assist with content creation and workflow automation.
             </p>
             <div className="grid grid-cols-3 gap-3 mt-6">
-              {/* Chat/Generation Mockup */}
-              <div className="aspect-[4/3] bg-slate-50 rounded-lg border border-slate-200 p-2.5 flex flex-col gap-2 overflow-hidden">
-                <div className="self-end w-2/3 h-4 bg-blue-100 rounded-l-lg rounded-tr-lg"></div>
-                <div className="self-start w-3/4 h-5 bg-slate-200 rounded-r-lg rounded-tl-lg"></div>
-                <div className="mt-auto h-3 w-full bg-white border border-slate-200 rounded-full"></div>
-              </div>
-              {/* Workflow Nodes Mockup */}
-              <div className="aspect-[4/3] bg-slate-50 rounded-lg border border-slate-200 p-2 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute w-full h-0.5 bg-slate-200"></div>
-                <div className="flex justify-between w-full z-10 px-2">
-                  <div className="w-5 h-5 rounded-full bg-emerald-400 border-[3px] border-white shadow-sm"></div>
-                  <div className="w-5 h-5 rounded-full bg-blue-400 border-[3px] border-white shadow-sm"></div>
-                  <div className="w-5 h-5 rounded-full bg-purple-400 border-[3px] border-white shadow-sm"></div>
-                </div>
-              </div>
-              {/* Content Preview Mockup */}
-              <div className="aspect-[4/3] bg-slate-50 rounded-lg border border-slate-200 p-2 flex flex-col gap-1.5 overflow-hidden">
-                <div className="w-full h-1/2 bg-slate-200 rounded-sm"></div>
-                <div className="h-2 w-3/4 bg-slate-300 rounded mt-1"></div>
-                <div className="h-1.5 w-full bg-slate-200 rounded"></div>
-                <div className="h-1.5 w-5/6 bg-slate-200 rounded"></div>
-              </div>
+              <img src="/images/vector/v2/vector-v2-1.jpeg" alt="Vector V2 screenshot 1" onClick={() => setSelectedImage({ src: '/images/vector/v2/vector-v2-1.jpeg', alt: 'Vector V2 screenshot 1' })} className="aspect-[4/3] w-full object-cover rounded-lg border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity" />
+              <img src="/images/vector/v2/vector-v2-2.jpeg" alt="Vector V2 screenshot 2" onClick={() => setSelectedImage({ src: '/images/vector/v2/vector-v2-2.jpeg', alt: 'Vector V2 screenshot 2' })} className="aspect-[4/3] w-full object-cover rounded-lg border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity" />
+              <img src="/images/vector/v2/vector-v2-3.jpeg" alt="Vector V2 screenshot 3" onClick={() => setSelectedImage({ src: '/images/vector/v2/vector-v2-3.jpeg', alt: 'Vector V2 screenshot 3' })} className="aspect-[4/3] w-full object-cover rounded-lg border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity" />
             </div>
           </motion.div>
 
@@ -125,31 +89,39 @@ export function VectorEvolution() {
               Vector V3 represents the next evolution of the product. Instead of focusing on tasks, it introduces a behavioral execution loop built around daily check-ins, mission execution, and nightly reflection. The goal is to create an AI-assisted system that helps users plan, execute, and adapt toward long-term goals.
             </p>
             <div className="grid grid-cols-3 gap-3 mt-6">
-              {/* Calendar/Planning Mockup */}
-              <div className="aspect-[4/3] bg-slate-50 rounded-lg border border-slate-200 p-2 flex flex-col gap-1.5 overflow-hidden">
-                <div className="h-2 w-1/3 bg-slate-300 rounded mb-0.5"></div>
-                <div className="grid grid-cols-4 gap-1">
-                  {[...Array(12)].map((_, i) => (
-                    <div key={i} className={`aspect-square rounded-sm ${i === 4 || i === 7 ? 'bg-emerald-400' : 'bg-slate-200'}`}></div>
-                  ))}
-                </div>
-              </div>
-              {/* Behavioral Tracking Mockup */}
-              <div className="aspect-[4/3] bg-slate-50 rounded-lg border border-slate-200 p-2 flex items-end gap-1 overflow-hidden">
-                {[40, 70, 45, 90, 65, 80, 100].map((h, i) => (
-                  <div key={i} className="flex-1 bg-emerald-200 rounded-t-sm" style={{ height: `${h}%` }}></div>
-                ))}
-              </div>
-              {/* Mission Execution Mockup */}
-              <div className="aspect-[4/3] bg-slate-50 rounded-lg border border-slate-200 p-2 flex items-center justify-center overflow-hidden">
-                <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-emerald-500 border-r-emerald-500 flex items-center justify-center">
-                  <div className="w-5 h-5 bg-emerald-100 rounded-full"></div>
-                </div>
-              </div>
+              <img src="/images/vector/v3/vector-v3-1.jpeg" alt="Vector V3 screenshot 1" onClick={() => setSelectedImage({ src: '/images/vector/v3/vector-v3-1.jpeg', alt: 'Vector V3 screenshot 1' })} className="aspect-[4/3] w-full object-cover rounded-lg border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity" />
+              <img src="/images/vector/v3/vector-v3-2.jpeg" alt="Vector V3 screenshot 2" onClick={() => setSelectedImage({ src: '/images/vector/v3/vector-v3-2.jpeg', alt: 'Vector V3 screenshot 2' })} className="aspect-[4/3] w-full object-cover rounded-lg border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity" />
+              <img src="/images/vector/v3/vector-v3-3.jpeg" alt="Vector V3 screenshot 3" onClick={() => setSelectedImage({ src: '/images/vector/v3/vector-v3-3.jpeg', alt: 'Vector V3 screenshot 3' })} className="aspect-[4/3] w-full object-cover rounded-lg border border-slate-200 shadow-sm cursor-zoom-in hover:opacity-90 transition-opacity" />
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Lightbox */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-5xl w-full" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute -top-10 right-0 text-white/80 hover:text-white text-sm font-medium flex items-center gap-1.5 transition-colors"
+              aria-label="Close"
+            >
+              <span>Close</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+            <img
+              src={selectedImage.src}
+              alt={selectedImage.alt}
+              className="w-full h-auto rounded-xl shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
